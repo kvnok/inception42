@@ -1,18 +1,32 @@
+# This section contains options that apply globally to all MariaDB server instances
 [mysqld]
+
+# The MariaDB server will run as this user
 user = mysql
+
+# The Unix socket file that the server uses for communication
 socket = /var/run/mysqld/mysqld.sock
+
+# The port number to use for the connection
 port = 3306
+
+# The data directory of the MariaDB server
 datadir = /var/lib/mysql
 
-# Performance and Tuning
+# The size of the buffer used for index blocks
 key_buffer_size = 16M
+
+# The maximum size of one packet or any generated/intermediate string
 max_allowed_packet = 16M
 
-# Logging
+# The error log file
 log_error = /var/log/mysql/error.log
 
-# Character Set
+# The server's default character set
 character-set-server = utf8mb4
+
+# The server's default collation
 collation-server = utf8mb4_general_ci
 
+# The IP address to bind to
 bind-address = 0.0.0.0

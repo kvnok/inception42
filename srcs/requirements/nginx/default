@@ -1,27 +1,38 @@
-# Default server configuration
-
+# This block defines a server
 server {
-	# SSL configuration
-	listen 443 ssl default_server;
-	ssl_certificate /etc/ssl/certs/server.crt;
-	ssl_certificate_key /etc/ssl/private/server_pkey.pem;
+    # Listen on port 443 with SSL enabled, this server block is the default server
+    listen 443 ssl default_server;
+    
+    # The path to the SSL certificate
+    ssl_certificate /etc/ssl/certs/server.crt;
+    
+    # The path to the SSL certificate private key
+    ssl_certificate_key /etc/ssl/private/server_pkey.pem;
 
-	root /var/www/html;
-	index index.php;
+    # The root directory where the server will look for files
+    root /var/www/html;
+    
+    # The default file to serve if a directory is requested
+    index index.php;
 
-	server_name $DOMAIN_NAME;
+    # The domain name that should match for this server block
+    server_name $DOMAIN_NAME;
 
-	location / {
-		# First attempt to serve request as file, then
-		# as directory, then fall back to displaying a 404.
-		try_files $uri $uri/ =404;
-	}
+    # This block is for requests to the root directory and subdirectories
+    location / {
+        # Try to serve file directly, try to serve directory, otherwise return a 404 error
+        try_files $uri $uri/ =404;
+    }
 
-	# pass PHP scripts to FastCGI server
-	location ~ \.php$ {
-		include snippets/fastcgi-php.conf;
+    # This block is for requests to PHP files
+    location ~ \.php$ {
+        # Include the fastcgi-php configuration snippet
+        include snippets/fastcgi-php.conf;
 
-		fastcgi_param SCRIPT_FILENAME /var/www/html/$fastcgi_script_name;
-		fastcgi_pass wordpress:9000;
-	}
+        # Set the SCRIPT_FILENAME parameter to the full path of the requested script
+        fastcgi_param SCRIPT_FILENAME /var/www/html/$fastcgi_script_name;
+        
+        # Forward requests to the PHP-FPM service listening on the wordpress host on port 9000
+        fastcgi_pass wordpress:9000;
+    }
 }

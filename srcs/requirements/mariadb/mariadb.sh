@@ -1,7 +1,7 @@
 #!/bin/bash
 
 # Check if the MariaDB initialization is complete
-if [ ! -e "/var/lib/mysql/.init_complete" ]; then
+if [ ! -e "/var/lib/mysql/.done" ]; then
 	# Initialize the MariaDB database
 	mysql_install_db --user=mysql --datadir=/var/lib/mysql
 
@@ -39,7 +39,7 @@ if [ ! -e "/var/lib/mysql/.init_complete" ]; then
 	mysqladmin -u root -p$MYSQL_ROOT_PASSWORD shutdown
 
 	# Create a file to indicate that the MariaDB initialization is complete
-	touch /var/lib/mysql/.init_complete
+	touch /var/lib/mysql/.done
 fi
 
 # Execute the command passed to the script

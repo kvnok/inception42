@@ -24,7 +24,7 @@ fclean: clean prune
 
 re: fclean all
 
-ok: #for debugging
+ok: # for debugging
 	sudo rm -rf ~/data/db
 	sudo rm -rf ~/data/wp
 	mkdir -p ~/data/db

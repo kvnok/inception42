@@ -4,20 +4,6 @@ networks:
   intra:
     driver: bridge
 
-volumes:
-    db:
-      driver: local
-      driver_opts:
-        type: none
-        device: /home/kevin/data/db
-        o: bind
-    wp:
-      driver: local
-      driver_opts:
-        type: none
-        device: /home/kevin/data/wp
-        o: bind
-
 services:
   mariadb:
     container_name: mariadb
@@ -66,3 +52,18 @@ services:
       - intra
     depends_on:
       - wordpress
+
+volumes:
+  db:
+    driver: local
+    driver_opts:
+      type: none
+      device: ${HOME}/data/db
+      o: bind
+  wp:
+    driver: local
+    driver_opts:
+      type: none
+      device: ${HOME}/data/wp
+      o: bind
+

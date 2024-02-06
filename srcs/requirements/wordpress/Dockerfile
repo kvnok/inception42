@@ -5,7 +5,7 @@ FROM debian:bullseye
 RUN apt-get update -y && apt-get upgrade -y
 
 # Install PHP, PHP-FPM, PHP-CLI, PHP-MYSQL, PHP-MBSTRING, PHP-XML, MariaDB client, and curl
-RUN apt-get -y install php7.4 php-fpm php-cli php-mysql php-mbstring php-xml mariadb-client curl
+RUN apt-get -y install php7.4 php-fpm php-cli php-mysql mariadb-client curl
 
 # Create a directory for PHP to run
 RUN mkdir /run/php
